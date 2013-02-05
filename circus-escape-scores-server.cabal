@@ -19,7 +19,7 @@ library
                      Settings
                      Settings.StaticFiles
                      Settings.Development
-                     Handler.Home
+                     Handler.Score
 
     if flag(dev) || flag(library-only)
         cpp-options:   -DDEVELOPMENT
