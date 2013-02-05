@@ -1,0 +1,22 @@
+Default: &defaults
+  user: cescores
+  password: secret
+  host: localhost
+  port: 5432
+  database: cescores
+  poolsize: 10
+
+Development:
+  database: cescores_dev
+  <<: *defaults
+
+Testing:
+  database: cescores_test
+  <<: *defaults
+
+Staging:
+  database: cescores_staging
+  <<: *defaults
+
+Production:
+  <<: *defaults
