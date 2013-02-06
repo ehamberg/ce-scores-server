@@ -1,3 +1,5 @@
+{-# LANGUAGE TemplateHaskell #-}
+
 module Model where
 
 import Prelude
@@ -6,6 +8,7 @@ import Data.Text (Text)
 import Database.Persist.Quasi
 import Data.Time
 import Data.Int (Int64)
+import Data.Aeson.TH
 
 -- You can define all of your database entities in the entities file.
 -- You can find more information on persistent and how to declare entities
@@ -13,3 +16,5 @@ import Data.Int (Int64)
 -- http://www.yesodweb.com/book/persistent/
 share [mkPersist sqlOnlySettings, mkMigrate "migrateAll"]
     $(persistFileWith lowerCaseSettings "config/models")
+
+$(deriveJSON id ''CEScore)
