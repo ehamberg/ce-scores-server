@@ -15,7 +15,7 @@ secret = B.pack "secret" -- :-)
 
 getScoreR :: Handler RepJson
 getScoreR = do
-  scores <- runDB $ selectList [] [Desc CEScorePoints, Asc CEScoreTime]
+  scores <- runDB $ selectList [] [Desc CEScorePoints, Asc CEScoreTime, LimitTo 10]
   jsonToRepJson $ fmap entityVal scores
 
 putScoreR :: Handler RepJson
