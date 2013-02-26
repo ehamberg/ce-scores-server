@@ -1,7 +1,7 @@
 CEScore
     name   Text
-    time   UTCTime
-    points Int64
+    time   Int32
+    points Int32
     hash   Text
     UniqueScore name time points
 	deriving Show
