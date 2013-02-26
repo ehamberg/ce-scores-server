@@ -32,7 +32,7 @@ postScoreR = do
                            jsonToRepJson $ String e
                          Right _ -> do
                            _ <- runDB $ insert v
-                           jsonToRepJson $ String "success"
+                           getScoreR
 
 validate :: CEScore -> Int -> Either Text CEScore
 validate s@(CEScore name timestamp score hash) t = if validHash && validLength && validTime
