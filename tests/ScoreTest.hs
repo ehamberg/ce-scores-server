@@ -12,7 +12,8 @@ scoreSpecs =
       get_ "/scores"
       statusIs 200
 
-      --post "/score" $ do
-      --  byName "foo" "bar"
+      post "/scores" "{}" -- $ do
+        --byName "" "{}" -- validScore
 
-      --statusIs 200
+      printBody
+      statusIs 200
