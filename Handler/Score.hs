@@ -23,9 +23,13 @@ postScoreR = do
   entry <- parseJsonBody
   t <- fmap convert $ liftIO getPOSIXTime
   case entry of
-       Error s   -> jsonToRepJson $ String (pack s)
+       Error s   -> do
+         $(logWarn) $ T.pack $ "json parsing failed: " ++ s
+         jsonToRepJson $ String (T.pack s)
        Success v -> case validate v t of
-                         Left e  -> jsonToRepJson $ String e
+                         Left e  -> do
+                           $(logWarn) $ T.pack "failed validation"
+                           jsonToRepJson $ String e
                          Right _ -> do
                            _ <- runDB $ insert v
                            jsonToRepJson $ String "success"
