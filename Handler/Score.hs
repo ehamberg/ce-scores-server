@@ -18,8 +18,8 @@ getScoreR = do
   scores <- runDB $ selectList [] [Desc CEScorePoints, Asc CEScoreTime, LimitTo 10]
   jsonToRepJson $ fmap entityVal scores
 
-putScoreR :: Handler RepJson
-putScoreR = do
+postScoreR :: Handler RepJson
+postScoreR = do
   entry <- parseJsonBody
   t <- fmap convert $ liftIO getPOSIXTime
   case entry of
