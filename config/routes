@@ -3,4 +3,4 @@
 /favicon.ico FaviconR GET
 /robots.txt RobotsR GET
 
-/scores ScoreR GET POST
+/v1/scores ScoreR GET POST
