@@ -40,7 +40,7 @@ validate s@(CEScore name timestamp score hash) t = if validHash && validLength &
                                                       else Left "Failed validation"
   where validHash   = hash == (T.pack . show) (scoreHash name (fromIntegral timestamp) (fromIntegral score))
         validLength = T.length name < 25
-        validTime   = (t-fromIntegral timestamp) < 30
+        validTime   = (t-fromIntegral timestamp) < (10*24*60*60) -- 10 days
 
 scoreHash :: Text -> Int -> Int -> Digest SHA1State
 scoreHash n t s = hmacSha1 secret scoredesc
