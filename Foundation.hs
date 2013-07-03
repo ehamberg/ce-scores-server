@@ -10,6 +10,7 @@ import Settings.Development (development)
 import qualified Database.Persist.Store
 import Database.Persist.GenericSql
 import Settings (Extra (..))
+import System.Log.FastLogger (Logger)
 
 data App = App
     { settings :: AppConfig DefaultEnv Extra
@@ -17,6 +18,7 @@ data App = App
     , connPool :: Database.Persist.Store.PersistConfigPool Settings.PersistConfig
     , httpManager :: Manager
     , persistConfig :: Settings.PersistConfig
+    , appLogger :: Logger
     }
 
 mkYesodData "App" $(parseRoutesFile "config/routes")
@@ -29,6 +31,7 @@ instance Yesod App where
     shouldLog _ _source level =
         development || level == LevelWarn || level == LevelError
 
+    getLogger = return . appLogger
 instance YesodPersist App where
     type YesodPersistBackend App = SqlPersist
     runDB f = do
